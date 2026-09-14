@@ -37,7 +37,7 @@
                         <div class="card-tape"></div>
                         <a href="{{ route('folders.show', $folder) }}" class="scrapbook-cover">
                             @if($coverPhoto)
-                                <img src="{{ asset('storage/' . $coverPhoto->photo) }}" alt="{{ $folder->name }}">
+                                <img src="{{ $coverPhoto->url }}" alt="{{ $folder->name }}">
                             @else
                                 <div class="empty-cover"><span>✦</span><small>YOUR STORY</small></div>
                             @endif
@@ -46,7 +46,7 @@
                         @if($previewPhotos->count() > 1)
                             <div class="mini-photo-stack">
                                 @foreach($previewPhotos->skip(1) as $photo)
-                                    <div class="mini-photo"><img src="{{ asset('storage/' . $photo->photo) }}" alt=""></div>
+                                    <div class="mini-photo"><img src="{{ $photo->url }}" alt=""></div>
                                 @endforeach
                             </div>
                         @endif

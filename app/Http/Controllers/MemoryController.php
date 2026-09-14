@@ -71,7 +71,7 @@ class MemoryController extends Controller
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $index => $photo) {
-                $path = $photo->store('memories', 'public');
+                $path = $photo->store('memories', 'supabase');
                 $memory->photos()->create([
                     'photo' => $path,
                     'sort_order' => $index,
@@ -88,7 +88,7 @@ class MemoryController extends Controller
 
         foreach ($memory->photos as $photo) {
             if ($photo->photo) {
-                Storage::disk('public')->delete($photo->photo);
+                Storage::disk('supabase')->delete($photo->photo);
             }
         }
 

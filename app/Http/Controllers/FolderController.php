@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Folder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FolderController extends Controller
 {
@@ -48,12 +49,28 @@ class FolderController extends Controller
         return view('folders.show', compact('folder'));
     }
 
-    public function destroy(Folder $folder)
-    {
-        abort_unless($folder->user_id === auth()->id(), 403);
+  public function destroy(Folder $folder)
+{
+    abort_unless($folder->user_id === auth()->id(), 403);
 
-        $folder->delete();
+    $folder->load('memories.photos');
 
-        return redirect()->route('dashboard')->with('success', 'Scrapbook berhasil dihapus.');
+    foreach ($folder->memories as $memory) {
+        foreach ($memory->photos as $photo) {
+            if ($photo->photo) {
+                Storage::disk('supabase')->delete($photo->photo);
+            }
+        }
+
+        if ($memory->photo) {
+            Storage::disk('supabase')->delete($memory->photo);
+        }
     }
+
+    $folder->delete();
+
+    return redirect()
+        ->route('dashboard')
+        ->with('success', 'Scrapbook berhasil dihapus.');
+}
 }
