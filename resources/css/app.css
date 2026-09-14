@@ -1,9 +1,2615 @@
-@import 'tailwindcss';
+/* ================================================================
+   i REMEMBER ALL THE PLACES
+   SCRAPBOOK UI
+================================================================ */
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* ================================================================
+   RESET
+================================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(255,255,255,.7),
+            transparent 30%
+        ),
+        #eee5d8;
+
+    color: #493b31;
+
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+}
+
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+/* ================================================================
+   NAVBAR
+================================================================ */
+
+.site-navbar {
+    position: relative;
+    z-index: 50;
+
+    background:
+        rgba(255, 250, 240, .92);
+
+    border-bottom:
+        1px solid #d8cabb;
+
+    backdrop-filter:
+        blur(10px);
+}
+
+
+.navbar-inner {
+    width: min(
+        1180px,
+        calc(100% - 40px)
+    );
+
+    min-height: 76px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.site-logo {
+    display: flex;
+    flex-direction: column;
+
+    line-height: .9;
+}
+
+
+.logo-main {
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #4d3c30;
+}
+
+
+.logo-sub {
+    margin-left: 12px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 19px;
+
+    color: #8a6755;
+}
+
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.navbar-user {
+    font-size: 13px;
+    color: #76675b;
+}
+
+
+.logout-button {
+    border: 1px solid #cdbdac;
+
+    background: transparent;
+
+    color: #665548;
+
+    padding:
+        8px
+        14px;
+
+    border-radius: 7px;
+
+    transition: .2s;
+}
+
+
+.logout-button:hover {
+    background: #e8ddd0;
+}
+
+
+/* ================================================================
+   MAIN
+================================================================ */
+
+.site-main {
+    width: min(
+        1180px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        0 auto;
+
+    padding:
+        35px
+        0
+        70px;
+}
+
+
+/* ================================================================
+   ALERTS
+================================================================ */
+
+.alert {
+    position: relative;
+    z-index: 20;
+
+    display: flex;
+
+    margin-bottom: 25px;
+
+    padding:
+        14px
+        18px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+}
+
+
+.success-alert {
+    align-items: center;
+
+    gap: 10px;
+
+    background: #e8f1e4;
+
+    border: 1px solid #bfd2b8;
+
+    color: #55704e;
+}
+
+
+.alert-icon {
+    width: 23px;
+    height: 23px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #6e8966;
+
+    color: white;
+
+    font-size: 12px;
+}
+
+
+.validation-alert {
+    display: block;
+
+    background: #f8e4df;
+
+    border: 1px solid #e2b8ae;
+
+    color: #8d493d;
+}
+
+
+.alert-title {
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.validation-alert ul {
+    padding-left: 20px;
+}
+
+
+.validation-alert li {
+    margin-top: 3px;
+}
+
+
+/* ================================================================
+   HERO
+================================================================ */
+
+.scrapbook-dashboard {
+    position: relative;
+}
+
+
+.scrapbook-hero {
+    position: relative;
+
+    min-height: 430px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+
+    padding:
+        60px
+        80px;
+
+    margin-bottom: 45px;
+
+    background:
+        #d8c4a8;
+
+    box-shadow:
+        0 20px 45px rgba(70, 52, 39, .12);
+
+    transform: rotate(-.2deg);
+}
+
+
+.scrapbook-hero::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .3;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 27px,
+            rgba(100,80,60,.09) 28px
+        );
+}
+
+
+.hero-tape {
+    position: absolute;
+
+    width: 150px;
+    height: 38px;
+
+    top: -10px;
+    left: 42%;
+
+    background:
+        rgba(245, 222, 172, .72);
+
+    transform:
+        rotate(2deg);
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+
+.hero-small {
+    display: block;
+
+    margin-bottom: 16px;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    font-weight: 700;
+
+    color: #796351;
+}
+
+
+.hero-content h1 {
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(48px, 7vw, 88px);
+
+    line-height: .95;
+
+    color: #43342a;
+
+    font-weight: 600;
+}
+
+
+.hero-content h1 span {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 1.05em;
+
+    color: #785847;
+}
+
+
+.hero-content p {
+    max-width: 480px;
+
+    margin-top: 25px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: #68574a;
+}
+
+
+/* ================================================================
+   HERO POLAROIDS
+================================================================ */
+
+.hero-polaroid {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 145px;
+
+    padding: 10px 10px 25px;
+
+    background: #fffdf7;
+
+    box-shadow:
+        0 10px 25px rgba(60,45,35,.2);
+}
+
+
+.hero-polaroid-one {
+    right: 150px;
+    top: 65px;
+
+    transform:
+        rotate(8deg);
+}
+
+
+.hero-polaroid-two {
+    right: 60px;
+    bottom: 45px;
+
+    transform:
+        rotate(-9deg);
+}
+
+
+.polaroid-placeholder {
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #cdb99e;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 55px;
+
+    color: #806c58;
+}
+
+
+/* ================================================================
+   CREATE PAPER
+================================================================ */
+
+.create-paper {
+    position: relative;
+
+    margin:
+        0 auto
+        55px;
+
+    padding:
+        35px;
+
+    max-width: 900px;
+
+    background:
+        #fffaf0;
+
+    border:
+        1px solid #ddd0c0;
+
+    box-shadow:
+        0 12px 35px rgba(70,50,35,.1);
+
+    transform: rotate(.15deg);
+}
+
+
+.paper-tape {
+    position: absolute;
+
+    width: 100px;
+    height: 25px;
+
+    top: -11px;
+    left: 43%;
+
+    background:
+        rgba(230, 210, 169, .8);
+
+    transform: rotate(-2deg);
+}
+
+
+.paper-heading span {
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #9a806a;
+}
+
+
+.paper-heading h2 {
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 27px;
+
+    color: #4b3a2e;
+}
+
+
+.scrapbook-create-form {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        auto;
+
+    gap: 18px;
+
+    align-items: end;
+
+    margin-top: 25px;
+}
+
+
+/* ================================================================
+   FORMS
+================================================================ */
+
+.form-group,
+.memory-form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.form-group label,
+.memory-form-group label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .8px;
+
+    text-transform: uppercase;
+
+    color: #7c6858;
+}
+
+
+.form-group input,
+.form-group textarea,
+.memory-form-group input,
+.memory-form-group textarea {
+    width: 100%;
+
+    border:
+        1px solid #d6c8b9;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.72);
+
+    color: #493b31;
+
+    padding:
+        11px
+        13px;
+
+    transition: .2s;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.memory-form-group input:focus,
+.memory-form-group textarea:focus {
+    border-color: #9b8069;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(155,128,105,.1);
+}
+
+
+.form-group textarea,
+.memory-form-group textarea {
+    resize: vertical;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+.memory-form-group input::placeholder,
+.memory-form-group textarea::placeholder {
+    color: #aaa093;
+}
+
+
+/* ================================================================
+   BUTTON
+================================================================ */
+
+.scrapbook-button {
+    border: 0;
+
+    border-radius: 7px;
+
+    background: #604c3c;
+
+    color: white;
+
+    padding:
+        12px
+        18px;
+
+    white-space: nowrap;
+
+    transition: .2s;
+}
+
+
+.scrapbook-button:hover {
+    background: #49382c;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ================================================================
+   SECTION
+================================================================ */
+
+.scrapbook-section {
+    position: relative;
+}
+
+
+.section-title {
+    display: flex;
+
+    align-items: end;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+
+.section-title span {
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #927c69;
+}
+
+
+.section-title h2 {
+    margin-top: 4px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 35px;
+
+    color: #4b3a2e;
+}
+
+
+.section-count {
+    font-size: 12px;
+
+    color: #927f70;
+}
+
+
+/* ================================================================
+   SCRAPBOOK GRID
+================================================================ */
+
+.scrapbook-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 40px;
+}
+
+
+/* ================================================================
+   SCRAPBOOK CARD
+================================================================ */
+
+.scrapbook-card {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 14px;
+
+    background:
+        #fffaf2;
+
+    box-shadow:
+        0 13px 30px
+        rgba(65,48,37,.13);
+
+    transform:
+        rotate(-1deg);
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+}
+
+
+.scrapbook-card:nth-child(2n) {
+    transform:
+        rotate(1.3deg);
+}
+
+
+.scrapbook-card:nth-child(3n) {
+    transform:
+        rotate(-.5deg);
+}
+
+
+.scrapbook-card:hover {
+    transform:
+        translateY(-7px)
+        rotate(0deg);
+
+    box-shadow:
+        0 20px 40px
+        rgba(65,48,37,.18);
+}
+
+
+.card-tape {
+    position: absolute;
+
+    z-index: 5;
+
+    width: 70px;
+    height: 23px;
+
+    top: -10px;
+    left: calc(50% - 35px);
+
+    background:
+        rgba(224,202,162,.78);
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* ================================================================
+   COVER
+================================================================ */
+
+.scrapbook-cover {
+    position: relative;
+
+    display: block;
+
+    overflow: hidden;
+
+    aspect-ratio: 4 / 4.8;
+
+    background:
+        #d8c5aa;
+}
+
+
+.scrapbook-cover img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.empty-cover {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        #d5c1a5;
+
+    color: #806b56;
+}
+
+
+.empty-cover span {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 80px;
+}
+
+
+.empty-cover small {
+    letter-spacing: 4px;
+
+    font-size: 9px;
+}
+
+
+/* ================================================================
+   COVER LABEL
+================================================================ */
+
+.cover-label {
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+
+    padding:
+        13px
+        15px;
+
+    background:
+        rgba(255,250,240,.91);
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.12);
+}
+
+
+.cover-label small {
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #927d69;
+}
+
+
+.cover-label strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 19px;
+
+    color: #4c392c;
+}
+
+
+/* ================================================================
+   MINI PHOTOS
+================================================================ */
+
+.mini-photo-stack {
+    position: absolute;
+
+    right: -9px;
+    bottom: 80px;
+
+    z-index: 6;
+
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.mini-photo {
+    width: 55px;
+    height: 55px;
+
+    padding: 4px;
+
+    background: white;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.16);
+
+    transform:
+        rotate(6deg);
+}
+
+
+.mini-photo:nth-child(2) {
+    transform:
+        rotate(-7deg);
+}
+
+
+.mini-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ================================================================
+   CARD INFO
+================================================================ */
+
+.scrapbook-card-info {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        18px
+        3px
+        5px;
+}
+
+
+.scrapbook-card-info h3 {
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 20px;
+
+    color: #4d3a2d;
+}
+
+
+.scrapbook-card-info p {
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #918174;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+.memory-count {
+    flex: 0 0 auto;
+
+    text-align: right;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 25px;
+
+    color: #765d4b;
+}
+
+
+.memory-count span {
+    display: block;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #a09082;
+}
+
+
+/* ================================================================
+   DELETE FOLDER
+================================================================ */
+
+.delete-folder-form {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 8px;
+    right: 8px;
+}
+
+
+.small-delete {
+    width: 25px;
+    height: 25px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.8);
+
+    color: #9c766b;
+
+    opacity: 0;
+
+    transition: .2s;
+}
+
+
+.scrapbook-card:hover .small-delete {
+    opacity: 1;
+}
+
+
+.small-delete:hover {
+    background: #ead7d2;
+}
+
+
+/* ================================================================
+   EMPTY SCRAPBOOK
+================================================================ */
+
+.empty-scrapbook {
+    padding:
+        80px
+        30px;
+
+    text-align: center;
+
+    background:
+        rgba(255,250,241,.65);
+
+    border:
+        1px dashed #cbbbab;
+}
+
+
+.empty-sticker {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 70px;
+
+    color: #a88370;
+}
+
+
+.empty-scrapbook h3 {
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 25px;
+}
+
+
+.empty-scrapbook p {
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    color: #958477;
+}
+
+
+/* ================================================================
+   ALBUM PAGE
+================================================================ */
+
+.album-page {
+    width: 100%;
+}
+
+
+.album-topbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+    font-size: 12px;
+
+    color: #8b7868;
+}
+
+
+.back-link {
+    transition: .2s;
+}
+
+
+.back-link:hover {
+    color: #4d3c30;
+
+    transform:
+        translateX(-3px);
+}
+
+
+.album-topbar > span {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 23px;
+
+    color: #6f5848;
+}
+
+
+/* ================================================================
+   BOOK
+================================================================ */
+
+.album-book {
+    display: grid;
+
+    grid-template-columns:
+        .85fr
+        1.15fr;
+
+    align-items: start;
+
+    background:
+        #bda98d;
+
+    padding: 20px;
+
+    box-shadow:
+        0 20px 55px
+        rgba(62,45,32,.2);
+}
+
+
+.album-left-page,
+.album-right-page {
+    position: relative;
+
+    min-height: 800px;
+
+    background:
+        #fffaf0;
+}
+
+
+.album-left-page {
+    padding:
+        70px
+        45px;
+
+    border-right:
+        1px solid #d7c7b6;
+
+    background:
+        #f5ead8;
+}
+
+
+.album-right-page {
+    padding:
+        45px;
+
+    background:
+        #fffdf7;
+}
+
+
+.album-left-page::before,
+.album-right-page::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .2;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 29px,
+            rgba(100,80,60,.08) 30px
+        );
+}
+
+
+/* ================================================================
+   PAGE TAPE
+================================================================ */
+
+.page-tape {
+    position: absolute;
+
+    width: 100px;
+    height: 28px;
+
+    top: -12px;
+    left: 38%;
+
+    background:
+        rgba(222,199,158,.8);
+
+    transform:
+        rotate(-3deg);
+
+    z-index: 5;
+}
+
+
+.page-tape-right {
+    left: 50%;
+
+    transform:
+        rotate(2deg);
+}
+
+
+/* ================================================================
+   PAGE NUMBER
+================================================================ */
+
+.page-number {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 19px;
+
+    color: #9d8570;
+}
+
+
+/* ================================================================
+   ALBUM INTRO
+================================================================ */
+
+.album-intro {
+    position: relative;
+    z-index: 2;
+}
+
+
+.eyebrow {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: #9b8069;
+}
+
+
+.album-intro h1 {
+    margin-top: 15px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(35px, 4vw, 55px);
+
+    line-height: 1.05;
+
+    color: #4a382c;
+
+    word-break: break-word;
+}
+
+
+.album-description {
+    margin-top: 18px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 22px;
+
+    line-height: 1.35;
+
+    color: #7a6352;
+}
+
+
+.album-divider {
+    margin:
+        30px
+        0;
+
+    font-size: 25px;
+
+    color: #a88770;
+}
+
+
+.album-stats {
+    display: flex;
+
+    gap: 35px;
+}
+
+
+.album-stats div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.album-stats strong {
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 26px;
+
+    color: #594638;
+}
+
+
+.album-stats span {
+    margin-top: 2px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #9b8979;
+}
+
+
+/* ================================================================
+   LEFT PHOTO COLLAGE
+================================================================ */
+
+.left-photo-collage {
+    position: relative;
+
+    height: 300px;
+
+    margin-top: 45px;
+}
+
+
+.left-polaroid {
+    position: absolute;
+
+    width: 155px;
+
+    padding:
+        9px
+        9px
+        27px;
+
+    background: #fff;
+
+    box-shadow:
+        0 10px 22px
+        rgba(60,45,35,.17);
+}
+
+
+.left-polaroid-1 {
+    left: 10px;
+    top: 10px;
+
+    transform:
+        rotate(-7deg);
+}
+
+
+.left-polaroid-2 {
+    right: 5px;
+    top: 65px;
+
+    transform:
+        rotate(8deg);
+}
+
+
+.polaroid-image {
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: #ddd;
+}
+
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.left-polaroid > span {
+    position: absolute;
+
+    bottom: 6px;
+    left: 10px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 16px;
+
+    color: #806958;
+}
+
+
+.left-placeholder {
+    margin-top: 50px;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    border:
+        1px dashed #c9b7a4;
+}
+
+
+.left-placeholder span {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 60px;
+
+    color: #aa8d76;
+}
+
+
+.left-placeholder p {
+    max-width: 200px;
+
+    margin: auto;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 20px;
+
+    color: #806c59;
+}
+
+
+.handwritten {
+    position: absolute;
+
+    bottom: 30px;
+    right: 35px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 19px;
+
+    color: #9a7660;
+
+    transform:
+        rotate(-4deg);
+}
+
+
+/* ================================================================
+   MEMORY FORM
+================================================================ */
+
+.memory-form-paper {
+    position: relative;
+    z-index: 3;
+
+    padding: 25px;
+
+    background:
+        #f5ead9;
+
+    border:
+        1px solid #ded0bd;
+
+    box-shadow:
+        0 8px 25px
+        rgba(60,45,35,.08);
+
+    transform:
+        rotate(.2deg);
+}
+
+
+.form-paper-title span {
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #a0856e;
+}
+
+
+.form-paper-title h2 {
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 25px;
+
+    color: #4e3c30;
+}
+
+
+#memoryForm {
+    display: grid;
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+/* ================================================================
+   PHOTO UPLOAD
+================================================================ */
+
+.photo-upload-box {
+    min-height: 135px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border:
+        2px dashed #c8b6a2;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.45);
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.photo-upload-box:hover {
+    background:
+        rgba(255,255,255,.8);
+
+    border-color:
+        #9a8069;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.upload-icon {
+    font-size: 28px;
+
+    margin-bottom: 6px;
+}
+
+
+.photo-upload-box strong {
+    font-size: 14px;
+
+    color: #5b4738;
+}
+
+
+.photo-upload-box span {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: #8d7b6c;
+}
+
+
+.photo-upload-box small {
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    color: #a29384;
+}
+
+
+/* ================================================================
+   PHOTO PREVIEW
+================================================================ */
+
+.photo-preview-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.preview-photo-item {
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 5px;
+
+    background: #ddd;
+}
+
+
+.preview-photo-item img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.preview-photo-item span {
+    position: absolute;
+
+    top: 4px;
+    left: 4px;
+
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(60,45,35,.8);
+
+    color: white;
+
+    font-size: 9px;
+}
+
+
+/* ================================================================
+   LOCATION SEARCH
+================================================================ */
+
+.location-search-wrapper {
+    position: relative;
+}
+
+
+.location-results {
+    position: absolute;
+
+    z-index: 100;
+
+    left: 0;
+    right: 0;
+
+    top:
+        calc(100% + 5px);
+
+    overflow: hidden;
+
+    display: none;
+
+    background:
+        #fffdf8;
+
+    border:
+        1px solid #d5c5b5;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(50,35,25,.15);
+}
+
+
+.location-result-item {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding:
+        11px
+        13px;
+
+    border: 0;
+
+    border-bottom:
+        1px solid #eee6dc;
+
+    background: transparent;
+
+    text-align: left;
+
+    color: #55463a;
+}
+
+
+.location-result-item:hover {
+    background:
+        #f5ede3;
+}
+
+
+.location-result-item:last-child {
+    border-bottom: 0;
+}
+
+
+.result-pin {
+    flex: 0 0 auto;
+}
+
+
+.location-loading,
+.location-empty {
+    padding: 13px;
+
+    font-size: 12px;
+
+    color: #8d7b6c;
+}
+
+
+/* ================================================================
+   SELECTED LOCATION
+================================================================ */
+
+.selected-location {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-top: 8px;
+
+    padding:
+        10px
+        12px;
+
+    background:
+        #eee4d7;
+
+    border:
+        1px solid #d7c8b8;
+
+    border-radius: 8px;
+}
+
+
+.selected-location > span {
+    font-size: 16px;
+}
+
+
+.selected-location strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: #554238;
+}
+
+
+.selected-location small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color: #928274;
+}
+
+
+/* ================================================================
+   STICK MEMORY BUTTON
+================================================================ */
+
+.stick-memory-button {
+    width: 100%;
+
+    border: 0;
+
+    padding:
+        13px
+        18px;
+
+    border-radius: 7px;
+
+    background:
+        #614d3c;
+
+    color: white;
+
+    font-size: 13px;
+
+    transition: .2s;
+}
+
+
+.stick-memory-button:hover {
+    background:
+        #49382c;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ================================================================
+   MEMORIES HEADING
+================================================================ */
+
+.memories-heading {
+    position: relative;
+    z-index: 2;
+
+    margin:
+        50px
+        0
+        20px;
+}
+
+
+.memories-heading span {
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #a08670;
+}
+
+
+.memories-heading h2 {
+    margin-top: 3px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 30px;
+
+    color: #4e3c30;
+}
+
+
+/* ================================================================
+   MEMORY LIST
+================================================================ */
+
+.memory-list {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+
+.memory-entry {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        75px
+        1fr;
+
+    gap: 18px;
+
+    padding:
+        25px;
+
+    background:
+        #fffaf1;
+
+    border:
+        1px solid #e0d2c1;
+
+    box-shadow:
+        0 8px 22px
+        rgba(60,45,35,.09);
+
+    transform:
+        rotate(-.5deg);
+}
+
+
+.memory-entry:nth-child(2n) {
+    transform:
+        rotate(.7deg);
+
+    background:
+        #f8f0e4;
+}
+
+
+.memory-entry:nth-child(3n) {
+    transform:
+        rotate(-.8deg);
+}
+
+
+.memory-entry-2 {
+    margin-left: 12px;
+}
+
+
+.memory-entry-3 {
+    margin-right: 10px;
+}
+
+
+.memory-entry-4 {
+    margin-left: 5px;
+}
+
+
+/* ================================================================
+   MEMORY TAPE
+================================================================ */
+
+.memory-tape {
+    position: absolute;
+
+    width: 75px;
+    height: 22px;
+
+    top: -10px;
+    left: calc(50% - 37px);
+
+    background:
+        rgba(224,202,163,.72);
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* ================================================================
+   MEMORY DATE
+================================================================ */
+
+.memory-date {
+    padding-top: 5px;
+
+    text-align: center;
+
+    color: #866b56;
+}
+
+
+.memory-date span {
+    display: block;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 32px;
+
+    line-height: 1;
+}
+
+
+.memory-date small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    color: #a18d7b;
+}
+
+
+/* ================================================================
+   MEMORY CONTENT
+================================================================ */
+
+.memory-content h3 {
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 22px;
+
+    color: #4d3b2f;
+}
+
+
+.memory-note {
+    margin-top: 13px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 19px;
+
+    line-height: 1.4;
+
+    color: #77604e;
+}
+
+
+/* ================================================================
+   MEMORY PHOTO GRID
+================================================================ */
+
+.memory-photo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.memory-photo {
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 1 / 1;
+
+    background: #e6ddd1;
+
+    border: 3px solid white;
+
+    box-shadow:
+        0 4px 12px
+        rgba(50,35,25,.1);
+}
+
+
+.memory-photo:first-child:last-child {
+    aspect-ratio: 4 / 3;
+}
+
+
+.memory-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .3s;
+}
+
+
+.memory-photo:hover img {
+    transform:
+        scale(1.05);
+}
+
+
+/* 5+ FOTO */
+
+.memory-photo-grid:has(
+    .memory-photo:nth-child(5)
+) {
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+}
+
+
+/* ================================================================
+   MEMORY LOCATION
+================================================================ */
+
+.memory-location {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-top: 13px;
+
+    padding:
+        10px
+        12px;
+
+    background:
+        rgba(239,231,220,.8);
+
+    border-radius: 8px;
+}
+
+
+.memory-location > span {
+    flex: 0 0 auto;
+
+    font-size: 15px;
+}
+
+
+.memory-location > div {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.memory-location strong {
+    display: block;
+
+    font-size: 11px;
+
+    color: #57463a;
+}
+
+
+.memory-location small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    color: #968576;
+}
+
+
+.memory-location a {
+    font-size: 10px;
+
+    color: #735b48;
+
+    text-decoration: underline;
+
+    white-space: nowrap;
+}
+
+
+/* ================================================================
+   MEMORY DELETE
+================================================================ */
+
+.memory-delete {
+    margin-top: 15px;
+
+    padding:
+        5px
+        9px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #ae8378;
+
+    font-size: 10px;
+
+    text-decoration: underline;
+}
+
+
+.memory-delete:hover {
+    color: #8d493d;
+}
+
+
+/* ================================================================
+   NO MEMORY
+================================================================ */
+
+.no-memories {
+    padding:
+        70px
+        25px;
+
+    text-align: center;
+
+    border:
+        1px dashed #cdbbaa;
+
+    background:
+        rgba(255,250,241,.65);
+}
+
+
+.no-memories > span {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 60px;
+
+    color: #ad8a72;
+}
+
+
+.no-memories h3 {
+    margin-top: 3px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 23px;
+}
+
+
+.no-memories p {
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #958477;
+}
+
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+
+@media (max-width: 950px) {
+
+    .scrapbook-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .album-book {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .album-left-page {
+        min-height: 600px;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid #d7c7b6;
+    }
+
+
+    .album-right-page {
+        min-height: auto;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .site-main {
+        width:
+            calc(100% - 24px);
+
+        padding-top: 20px;
+    }
+
+
+    .navbar-inner {
+        width:
+            calc(100% - 24px);
+
+        min-height: 65px;
+    }
+
+
+    .navbar-user {
+        display: none;
+    }
+
+
+    .scrapbook-hero {
+        min-height: 500px;
+
+        padding:
+            45px
+            25px;
+    }
+
+
+    .hero-polaroid-one {
+        right: 70px;
+        top: auto;
+        bottom: 45px;
+
+        width: 110px;
+    }
+
+
+    .hero-polaroid-two {
+        right: 10px;
+        bottom: 25px;
+
+        width: 95px;
+    }
+
+
+    .scrapbook-create-form {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .scrapbook-grid {
+        grid-template-columns:
+            1fr;
+
+        gap: 30px;
+    }
+
+
+    .section-title {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .album-book {
+        padding: 8px;
+    }
+
+
+    .album-left-page,
+    .album-right-page {
+        padding:
+            40px
+            25px;
+    }
+
+
+    .left-photo-collage {
+        transform:
+            scale(.9);
+
+        transform-origin:
+            top left;
+    }
+
+
+    .memory-entry {
+        grid-template-columns:
+            55px
+            1fr;
+
+        gap: 12px;
+
+        padding:
+            20px
+            15px;
+    }
+
+
+    .memory-date span {
+        font-size: 26px;
+    }
+
+
+    .memory-photo-grid:has(
+        .memory-photo:nth-child(5)
+    ) {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .site-logo .logo-main {
+        font-size: 18px;
+    }
+
+
+    .logo-sub {
+        font-size: 15px;
+    }
+
+
+    .logout-button {
+        padding:
+            7px
+            10px;
+
+        font-size: 11px;
+    }
+
+
+    .scrapbook-hero {
+        min-height: 440px;
+
+        padding:
+            35px
+            20px;
+    }
+
+
+    .hero-content h1 {
+        font-size: 46px;
+    }
+
+
+    .hero-content p {
+        font-size: 13px;
+    }
+
+
+    .hero-polaroid-one {
+        display: none;
+    }
+
+
+    .hero-polaroid-two {
+        right: 20px;
+        bottom: 20px;
+
+        width: 90px;
+    }
+
+
+    .create-paper {
+        padding: 25px 20px;
+    }
+
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+
+    .album-left-page,
+    .album-right-page {
+        padding:
+            35px
+            18px;
+    }
+
+
+    .album-intro h1 {
+        font-size: 38px;
+    }
+
+
+    .memory-form-paper {
+        padding: 18px;
+    }
+
+
+    .photo-preview-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+
+    .memory-photo-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .memory-location {
+        flex-wrap: wrap;
+    }
+
+
+    .memory-location a {
+        width: 100%;
+
+        margin-left: 24px;
+    }
+
 }
